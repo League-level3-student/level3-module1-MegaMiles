@@ -1,3 +1,4 @@
+
 package _01_MurderOfCrows;
 
 import java.util.ArrayList;
@@ -18,6 +19,28 @@ public class MurderOfCrows {
         //    through the stomach of each Crow, then print the name of the
         //    guilty Crow.
 
+//Steps
+    	//turn the crows into a Array list or use prexisting one
+    	//interate through with for loop
+    	//find the diamond
+    	//find out how many crows we had to go through to fing the diamond
+    	//add what statistics we found to a joptionpane.showmessagedialog statement
+ 
+for (int i = 0; i < theMurder.size(); i++) {
+	Crow crows = theMurder.get(i);	
+
+	for (int j = 0; j < crows.getStomachContents().size(); j++) {
+		String contents = crows.getStomachContents().get(j);
+		if (contents.equals("diamond")) {
+System.out.println(crows.getName());
+System.out.println(i + " Innocent crow(s) died to find the diamond");
+
+		}
+	}
+
+}
+
+    	
         // 2. How many innocent crows had to die before the diamond was found?
 
     }

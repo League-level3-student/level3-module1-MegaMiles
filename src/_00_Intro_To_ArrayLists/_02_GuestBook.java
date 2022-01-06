@@ -2,6 +2,7 @@ package _00_Intro_To_ArrayLists;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -27,29 +28,39 @@ public static void main(String[] args) {
 _02_GuestBook book = new _02_GuestBook();
 book.ActionListeners();
 }
+
+ArrayList<String> names = new ArrayList<String>();
 public void ActionListeners() {
 	//creating frame, panel, and buttons
 JFrame frame = new JFrame();	
 JPanel panel = new JPanel();
 
-//adding uses for the frame,panel, and buttons	
+//adding uses for the frame, panel, and buttons	
 frame.add(panel);
 panel.add(button1);
 panel.add(button2);
 frame.setVisible(true);
 button1.addActionListener(this);
-button1.addActionListener(this);
-
+button2.addActionListener(this);
+frame.pack();
+frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 }
 @Override
 public void actionPerformed(ActionEvent e) {
 //logic and stuff
 if (e.getSource() == button1) {
-String names = JOptionPane.showInputDialog("Please enter a name to the guest book");		
+String name = JOptionPane.showInputDialog("Please enter a name to the guest book");	
+names.add(name);
 }
+int num = 1;
 if (e.getSource() == button2) {
-JOptionPane.showMessageDialog(null,"Here are the names in the guest book as follows ");	
-JOptionPane.showMessageDialog(null,"Guest #1 is " + );	
+	
+for (int i = 0; i < names.size(); i++) {
+String name1 = names.get(i);
+System.out.println("Guest #" + (i+1) + " is " + name1);
+}	
+	
+
 }
 
 }
