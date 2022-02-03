@@ -1,3 +1,13 @@
+float y;
+float h; 
+float x; 
+float w; 
+Rectangle rect1;
+Rectangle rect2;
+Rectangle rect3;
+Rectangle rect4;
+Rectangle rect5;
+ArrayList<Rectangle> rects = new ArrayList<Rectangle>();
 color bgColor = color(31, 0, 48);
 
 // RGB colors
@@ -16,23 +26,42 @@ color[] sunColors = {
 
 void setup() {
   // 1. Set the size of your sketch
-  
+size(1792,1068); 
+y = width / 2;  
+h = 50;
+x = width/2 - 750/2;  
+w = 2 * 750/2;
+rect1 = new Rectangle(x, y+100, w, h); 
+rect2 = new Rectangle(x, y+200, w, h);
+rect3 = new Rectangle(x, y+300, w, h);
+rect4 = new Rectangle(x, y+400, w, h);
+rect5 = new Rectangle(x, y+500, w, h);
+rects.add(rect1);
+rects.add(rect2);
+rects.add(rect3);
+rects.add(rect4);
+rects.add(rect5);
 }
 
 
 void draw() {
   // 2. Draw the bgColor background color
-
+background(bgColor);
   /*
    * PART 1: Drawing the sun
    */
-
+fill(sunColors[0]);
+noStroke();
+ellipse(width/2, height/2, 750, 750);  
   // Draw an ellipse for the sun in the center of the window
   // Use fill(sunColors[0]) to make it yellow
   // Use noStroke() to remove the black outline
 
   // Do you see a yellow sun like in the 1st image?
   // If not, fix your code before proceeding.
+
+
+
 
   /*
    * PART 2: Drawing a color gradient on the sun
@@ -44,10 +73,18 @@ void draw() {
   // Call the loadPixels() method to put all the pixel colors into
   // the pixels[] array
   // https://processing.org/reference/loadPixels_.html
-
+loadPixels();
   // Loop through all the pixels in your window.
   // By default, a pixel is a 1x1 colored square, so if the window width is 600 
   // and the height is 400 (600x400), then there are 600 * 400 = 240,000 pixels 
+for (int i = 0; i < pixels.length; i++) {
+  if(pixels[i] == sunColors[0])  {
+  int y = i / width;
+  float step = map(y, height/2-375, height/2+375, 0, 1);
+  pixels[i] = interpolateColor(sunColors, step);
+}
+}
+updatePixels();
 
     // We want to change the color of our sun so use an if statement
     // to check if the pixel is the color of the yellow circle. 
@@ -94,9 +131,12 @@ void draw() {
   //   float w = 2 * sunRadius
 
   // Do you see a section missing from the sun like in the 3rd image?
+for (int i = 0; i < rects.size(); i++){
+rects.get(i).draw();  
+rects.get(i).update();
+}
 
-
-  /*
+/*
    * PART 4: Moving the missing sun sections
    *
    * To move a section upwards each rectangle's y value needs to decrease.
@@ -123,6 +163,8 @@ void draw() {
 
   // Add code to reset the height of the rectangle when it moves back to
   // the bottom of the sun.
+
+
 
   /*
    * PART 5: Managing the missing sun sections
@@ -170,9 +212,30 @@ class Rectangle {
   float x, y, w, h;
 
   Rectangle(float x, float y, float w, float h) {
+    //max height 50, min height 1, bottom is height/2+375, top height is height/2-130
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
   }
+void draw() {
+//drwaing the rectangle
+fill(bgColor);
+rect(x, y, w, h);
+
+
+
+}
+  
+void update() {
+//size of rectangle
+y-=2; 
+if(y <= height/2-130){
+y = height/2+375;
+}
+h = map(y, height/2-130, height/2+375, 1, 50);
+
+
+  
+} 
 }
