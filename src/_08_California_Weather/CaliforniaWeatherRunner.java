@@ -7,5 +7,7 @@ public class CaliforniaWeatherRunner {
     
     public static void main(String[] args) {
         new CaliforniaWeather().start();
+        CaliforniaWeather CW = new CaliforniaWeather();
+        CW.Setup();
     }
 }
