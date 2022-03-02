@@ -2,6 +2,7 @@ package _08_California_Weather;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JButton;
@@ -44,7 +45,7 @@ public class CaliforniaWeather implements ActionListener {
 		WeatherSearch.addActionListener(this);
 		WeatherSpecify.addActionListener(this);
 		WeatherMinMax.addActionListener(this);
-		
+	
 		
 
 //  2. Create a way for the user to specify the weather condition and then
@@ -57,8 +58,8 @@ public class CaliforniaWeather implements ActionListener {
 //  Example: User: minimum temperature �F = 65.0, max temperature �F = 70.0
 //           Program: Fortana, Glendale, Escondido, Del Mar, ...
 
-	}
 	
+	}	
 // EXTRA:
 //  Feel free to add pictures for specific weather conditions or a thermometer
 //  for the temperature. Also If you want your program to get the current day's
@@ -81,15 +82,29 @@ JOptionPane.showMessageDialog(null, cityName + " is " + datum.weatherSummary + "
 			}
 
 		if (e.getSource() == WeatherSpecify) {
-			String Specify = JOptionPane.showInputDialog(null, "Please specify the weather conditions of the city you are look for");
+			String Specify = JOptionPane.showInputDialog(null, "Please specify the weather conditions of the city you are look for(Mostly Cloudy, Clear, Overcast, Possible Drizzle ");
+ArrayList<String> cities = new ArrayList<String>();			
 for (String WeatherCity : weatherData.keySet()) {
 	WeatherData WD = weatherData.get(WeatherCity);
-	System.out.println(WD.weatherSummary);
-}	
-if (!weatherData.containsKey(Specify)) {
+String WeatherSummary = WD.weatherSummary;	 
+if (WeatherSummary.contains(Specify)) {
+	
+cities.add(WeatherCity);
+}
+}
+String main = "The cities that have the condition " + Specify + " are: ";
+for (int i = 0; i < cities.size(); i++) {
+if(i%10==0) {
+main+="\n";
+}
+main+= ", " + cities.get(i);
+}
+if(cities.size() == 0) {
 	JOptionPane.showMessageDialog(null, "Unable to find a city with the condition " + "'" + Specify + "'. Please make sure you typed it in correctly and try again.");
 }
-
+else {
+JOptionPane.showMessageDialog(null, main);
+}
 
 			
 			
