@@ -113,9 +113,18 @@ JOptionPane.showMessageDialog(null, main);
 		}
 		
 		if (e.getSource() == WeatherMinMax) {
-			String MinMax = JOptionPane.showInputDialog(null,
-					"Please enter the minimum and maximum of the city you are looking for like this x, y");
-			
+String Min = JOptionPane.showInputDialog(null, "Please enter the minimum temperature of the city you are looking for");
+String Max = JOptionPane.showInputDialog(null, "Please enter the maximum temperature of the city you are looking for");			
+for(String weatherTemp : weatherData.keySet()) {
+WeatherData temperature = weatherData.get(weatherTemp);
+if () {
+JOptionPane.showMessageDialog(null, "There is no city that has a low of " + Min + " and a high of " + Max + " Please make sure you typed it in correctly and try again.");
+
+
+
+}
+
+}			
 			
 			
 			
