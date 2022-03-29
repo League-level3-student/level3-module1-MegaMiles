@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -69,6 +70,7 @@ public class CaliforniaWeather implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		ArrayList<String> cities = new ArrayList<String>();		
 		if (e.getSource() == WeatherSearch) {
 			String Search = JOptionPane.showInputDialog(null, "Please enter the city for information on the conditions of the city");
 			String cityName = Utilities.capitalizeWords(Search);
@@ -82,8 +84,7 @@ JOptionPane.showMessageDialog(null, cityName + " is " + datum.weatherSummary + "
 			}
 
 		if (e.getSource() == WeatherSpecify) {
-			String Specify = JOptionPane.showInputDialog(null, "Please specify the weather conditions of the city you are look for(Mostly Cloudy, Clear, Overcast, Possible Drizzle ");
-ArrayList<String> cities = new ArrayList<String>();			
+			String Specify = JOptionPane.showInputDialog(null, "Please specify the weather conditions of the city you are look for(Mostly Cloudy, Clear, Overcast, Possible Drizzle ");		
 for (String WeatherCity : weatherData.keySet()) {
 	WeatherData WD = weatherData.get(WeatherCity);
 String WeatherSummary = WD.weatherSummary;	 
@@ -115,18 +116,23 @@ JOptionPane.showMessageDialog(null, main);
 		if (e.getSource() == WeatherMinMax) {
 String Min = JOptionPane.showInputDialog(null, "Please enter the minimum temperature of the city you are looking for");
 String Max = JOptionPane.showInputDialog(null, "Please enter the maximum temperature of the city you are looking for");			
-for(String weatherTemp : weatherData.keySet()) {
-WeatherData temperature = weatherData.get(weatherTemp);
-if () {
-JOptionPane.showMessageDialog(null, "There is no city that has a low of " + Min + " and a high of " + Max + " Please make sure you typed it in correctly and try again.");
-
-
+for(String city : weatherData.keySet()) {
+Double temperature = weatherData.get(city).temperatureF;
+if(Integer.parseInt(Min) <= temperature && Integer.parseInt(Max) >= temperature) {
+cities.add(city);
 
 }
-
+}	
+if (cities.size() == 0) {
+JOptionPane.showMessageDialog(null, "There is no city that has a low of " + Min + " and a high of " + Max + " Please make sure you typed it in correctly and try again.");			
+}
+else {
+	String numbers = "";
+	for (int i = 0; i < 5; i++) {
+	numbers += i + ", ";
+	}
+JOptionPane.showMessageDialog(null, "The cities you are looking for are " + cities + ". ");
 }			
-			
-			
 			
 			
 			
