@@ -2,7 +2,9 @@ package _09_World_Clocks;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -11,6 +13,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
+
+import _08_California_Weather.Utilities;
+import _08_California_Weather.WeatherData;
 
 /*
  * You task is to create a java program that:
@@ -50,10 +55,14 @@ public class WorldClocks implements ActionListener {
     
     public WorldClocks() {
         clockUtil = new ClockUtilities();
-String Opinion = JOptionPane.showInputDialog(null, "Enter in a city that you want the world clock for.");
-
+        String Opinion;
+        ArrayList<String> requestedCity = new ArrayList<String>();
+        for (int i = 0; i < 100; i++) {
+        Opinion = JOptionPane.showInputDialog(null, "Enter in a city that you want the world clock for, in the format City. Country(All caps).");
+        requestedCity.add(Opinion);
+        }
         // The format for the city must be: city, country (all caps)
-        city = Opinion;
+        city = requestedCity;
         timeZone = clockUtil.getTimeZoneFromCityName(city);   
         
         Calendar calendar = Calendar.getInstance(timeZone);
