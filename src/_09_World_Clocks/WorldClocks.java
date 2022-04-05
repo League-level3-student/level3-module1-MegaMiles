@@ -7,6 +7,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
@@ -49,10 +50,11 @@ public class WorldClocks implements ActionListener {
     
     public WorldClocks() {
         clockUtil = new ClockUtilities();
+String Opinion = JOptionPane.showInputDialog(null, "Enter in a city that you want the world clock for.");
 
         // The format for the city must be: city, country (all caps)
-        city = "Chicago, US";
-        timeZone = clockUtil.getTimeZoneFromCityName(city);
+        city = Opinion;
+        timeZone = clockUtil.getTimeZoneFromCityName(city);   
         
         Calendar calendar = Calendar.getInstance(timeZone);
         String month = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
