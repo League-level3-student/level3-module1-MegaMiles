@@ -53,16 +53,25 @@ public class WorldClocks implements ActionListener {
     String dateStr;
     String timeStr;
     
+    ArrayList<LocalizeTimezone> Var = new ArrayList<LocalizeTimezone>(); 
+    
+    
+    
+    
+    
     public WorldClocks() {
         clockUtil = new ClockUtilities();
         String Opinion;
-        ArrayList<String> requestedCity = new ArrayList<String>();
-        for (int i = 0; i < 100; i++) {
-        Opinion = JOptionPane.showInputDialog(null, "Enter in a city that you want the world clock for, in the format City. Country(All caps).");
-        requestedCity.add(Opinion);
-        }
+        
+        while(true) {
+        Opinion = JOptionPane.showInputDialog(null, "Enter in a city that you want the world clock for, in the format City. Country(All caps). When done entering cities type in 'done' ");
+        if (Opinion.equals("done")) {
+		break;	
+		}
+        
         // The format for the city must be: city, country (all caps)
-        city = requestedCity;
+        city = Opinion;
+        
         timeZone = clockUtil.getTimeZoneFromCityName(city);   
         
         Calendar calendar = Calendar.getInstance(timeZone);
@@ -87,7 +96,7 @@ public class WorldClocks implements ActionListener {
         // 1000 milliseconds
         timer = new Timer(1000, this);
         timer.start();
-    }
+    }}
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
@@ -101,3 +110,20 @@ public class WorldClocks implements ActionListener {
         frame.pack();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
