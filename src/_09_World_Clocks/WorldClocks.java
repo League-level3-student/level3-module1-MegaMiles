@@ -53,7 +53,7 @@ public class WorldClocks implements ActionListener {
     String dateStr;
     String timeStr;
     
-    ArrayList<LocalizeTimezone> Var = new ArrayList<LocalizeTimezone>(); 
+    ArrayList<LocalizeTimezone> clocks = new ArrayList<LocalizeTimezone>(); 
     
     
     
@@ -96,21 +96,27 @@ public class WorldClocks implements ActionListener {
         // 1000 milliseconds
         timer = new Timer(1000, this);
         timer.start();
+LocalizeTimezone time = new LocalizeTimezone(textArea, timeZone, city, dateStr, frame);
+clocks.add(time);
     }}
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        Calendar c = Calendar.getInstance(timeZone);
+LocalizeTimezone clockTime;
+for (int i = 0; i < clocks.size(); i++) {
+clockTime = clocks.get(i);	
+
+        Calendar c = Calendar.getInstance(clockTime.timeZone);
         String militaryTime = c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND);
         String twelveHourTime = " [" + c.get(Calendar.HOUR) + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND) + "]";
         timeStr = militaryTime + twelveHourTime;
         
         System.out.println(timeStr);
-        textArea.setText(city + "\n" + dateStr + "\n" + timeStr);
-        frame.pack();
+        clockTime.textArea.setText(clockTime.city + "\n" + clockTime.dateStr + "\n" + timeStr);
+        clockTime.frame.pack();
     }
 }
-
+}
 
 
 
